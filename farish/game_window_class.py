@@ -9,8 +9,8 @@ class game_window:
         self.width,self.height= 400,400
         self.image= pygame.Surface((self.width, self.height))
         self.rect= self.image.get_rect()
-        self.rows=10
-        self.cols=10
+        self.rows=30
+        self.cols=30
         self.grid=[[Cell(self.image, x, y) for x in range(self.cols)] for y in range(self.rows)]
 
 
