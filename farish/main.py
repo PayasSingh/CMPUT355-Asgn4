@@ -41,7 +41,12 @@ def click_cell(pos):
     grid_pos[1] = grid_pos[1]//20
     print(grid_pos[0], grid_pos[1])
 
-    game_window.grid[grid_pos[1]] [grid_pos[0]].alive = True
+    if game_window.grid[grid_pos[1]] [grid_pos[0]].alive:
+        game_window.grid[grid_pos[1]] [grid_pos[0]].alive = False
+    else:
+        game_window.grid[grid_pos[1]] [grid_pos[0]].alive = True
+
+    
 
 
 pygame.init()
