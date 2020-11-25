@@ -1,31 +1,10 @@
 import pygame
-<<<<<<< HEAD
-=======
 import random
 
->>>>>>> main
 
 class Cell:
     def __init__(self, surface, grid_x, grid_y):
         self.alive = False
-<<<<<<< HEAD
-        self.surface=surface
-        self.grid_x = grid_x
-        self.grid_y = grid_y
-        self.image=pygame.Surface((20,20))
-        self.rect=self.image.get_rect()
-
-    def update(self):
-        self.rect.topleft = (self.grid_x*20, self.grid_y*20)
-
-    def draw(self):
-        if self.alive:
-            self.image.fill((0,0,0))
-        else:
-            self.image.fill((0,0,0))
-            pygame.draw.rect(self.image,(255,255,255), (2,2,16,16))
-        self.surface.blit(self.image, (self.grid_x*20, self.grid_y*20))
-=======
         self.surface = surface
         self.grid_x = grid_x
         self.grid_y = grid_y
@@ -36,9 +15,7 @@ class Cell:
 
     def update(self):
         self.rect.topleft = (self.grid_x*20, self.grid_y*20)
-        for cell in self.neighbours:
-            if cell.alive:
-                self.alive_neighbours = + 1
+
 
     def draw(self):
         if self.alive:
@@ -76,4 +53,11 @@ class Cell:
                 self.neighbours.append(grid[neighbor[1]][neighbor[0]])
             except:
                 print(neighbor)
->>>>>>> main
+    
+    def live_neighbours(self):
+        count=0
+        for neighbour in self.neighbours:
+            if neighbour.alive:
+                count+=1
+
+        self.alive_neighbours=count

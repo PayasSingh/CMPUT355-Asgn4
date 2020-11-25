@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import pygame
-import sys
-from game_window_class import *
-
-
-WIDTH, HEIGHT = 500,500
-BACKGROUND= (199,199,199)
-FPS=60
-=======
 import sys
 import pygame
 from game_window_class import *
@@ -20,18 +10,10 @@ FPS = 60
 # ====================================
 # =========SETTINGS FUNCTIONS===========
 
->>>>>>> main
 
 def get_events():
     global running
     for event in pygame.event.get():
-<<<<<<< HEAD
-        if event.type==pygame.QUIT:
-            running = False
-
-def update():
-    game_window.update()
-=======
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -47,26 +29,10 @@ def update():
     game_window.update()
     for button in buttons:
         button.update(mouse_pos, game_state=state)
->>>>>>> main
 
 
 def draw():
     window.fill(BACKGROUND)
-<<<<<<< HEAD
-    game_window.draw()
-
-pygame.init()
-window= pygame.display.set_mode((WIDTH, HEIGHT))
-clock = pygame.time.Clock()
-game_window= game_window(window, 50,50)
-
-running=True
-
-while running:
-    get_events()
-    update()
-    draw()
-=======
     for button in buttons:
         button.draw()
     game_window.draw()
@@ -93,6 +59,7 @@ def running_update():
     game_window.update()
     for button in buttons:
         button.update(mouse_pos, game_state=state)
+    game_window.evaluate()
 
 
 def running_draw():
@@ -240,7 +207,6 @@ while running:
         paused_update()
         paused_draw()
 
->>>>>>> main
     pygame.display.update()
     clock.tick(FPS)
 

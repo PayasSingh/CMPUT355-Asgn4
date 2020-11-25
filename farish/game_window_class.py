@@ -1,23 +1,8 @@
+import copy
 import pygame
 from cell_class import *
 
 vec = pygame.math.Vector2
-<<<<<<< HEAD
-class game_window:
-    def __init__(self, screen, x, y):
-        self.screen=screen
-        self.pos=vec(x,y)
-        self.width,self.height= 400,400
-        self.image= pygame.Surface((self.width, self.height))
-        self.rect= self.image.get_rect()
-        self.rows=10
-        self.cols=10
-        self.grid=[[Cell(self.image, x, y) for x in range(self.cols)] for y in range(self.rows)]
-
-
-    def update(self):
-        self.rect.topleft= self.pos
-=======
 
 
 class Game_window:
@@ -39,27 +24,44 @@ class Game_window:
 
     def update(self):
         self.rect.topleft = self.pos
->>>>>>> main
         for row in self.grid:
             for cell in row:
                 cell.update()
 
     def draw(self):
-<<<<<<< HEAD
-        self.image.fill((102,102,102))
-=======
         self.image.fill((102, 102, 102))
->>>>>>> main
         for row in self.grid:
             for cell in row:
                 cell.draw()
         self.screen.blit(self.image, (self.pos.x, self.pos.y))
-<<<<<<< HEAD
-=======
 
     def reset_grid(self):
         self.grid = [[Cell(self.image, x, y)
                       for x in range(self.cols)]
                      for y in range(self.rows)
                      ]
->>>>>>> main
+        for row in self.grid:
+            for cell in row:
+                cell.get_neighbours(self.grid)
+
+    def evaluate(self):
+        new_grid = copy.copy(self.grid)
+
+        for row in self.grid:
+            for cell in row:
+                cell.live_neighbours()
+
+        for yidx, row in enumerate(self.grid):
+            for xidx, cell in enumerate(row):
+                if cell.alive:
+                    if cell.alive_neighbours==2 or cell.alive_neighbours==3:
+                        new_grid[yidx][xidx].alive = True
+                    if cell.alive_neighbours<2:
+                        new_grid[yidx][xidx].alive=False
+                    if cell.alive_neighbours>3:
+                        new_grid[yidx][xidx].alive=False
+                else:
+                    if cell.alive_neighbours==3:
+                        new_grid[yidx][xidx].alive=True
+
+        self.grid = new_grid
