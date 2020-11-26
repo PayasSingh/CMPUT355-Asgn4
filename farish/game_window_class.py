@@ -6,7 +6,7 @@ class game_window:
     def __init__(self, screen, x, y):
         self.screen=screen
         self.pos=vec(x,y)
-        self.width,self.height= 600,600
+        self.width,self.height= 400,400
         self.image= pygame.Surface((self.width, self.height))
         self.rect= self.image.get_rect()
         self.rows=30
@@ -29,3 +29,5 @@ class game_window:
             for cell in row:
                 cell.draw()
         self.screen.blit(self.image, (self.pos.x, self.pos.y))
+
+        
