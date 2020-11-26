@@ -1,5 +1,4 @@
 import pygame
-import random
 
 
 class Cell:
@@ -17,14 +16,14 @@ class Cell:
         self.rect.topleft = (self.grid_x*20, self.grid_y*20)
         for cell in self.neighbours:
             if cell.alive:
-                self.alive_neighbours = + 1
+                self.alive_neighbours += 1
 
     def draw(self):
         if self.alive:
             self.image.fill((0, 0, 0))
         else:
             self.image.fill((0, 0, 0))
-            pygame.draw.rect(self.image, (255, 255, 255), (2, 2, 16, 16))
+            pygame.draw.rect(self.image, (255, 255, 255), (1, 1, 18, 18))
         self.surface.blit(self.image, (self.grid_x*20, self.grid_y*20))
 
     def get_neighbours(self, grid):
@@ -39,16 +38,16 @@ class Cell:
             neighbor[1] += self.grid_y
         for neighbor in neighbour_list:
             if neighbor[0] < 0:
-                neighbor[0] += 20
+                neighbor[0] += 30
 
             if neighbor[1] < 0:
-                neighbor[1] += 20
+                neighbor[1] += 30
 
-            if neighbor[1] > 19:
-                neighbor[1] -= 20
+            if neighbor[1] > 29:
+                neighbor[1] -= 30
 
-            if neighbor[0] > 19:
-                neighbor[0] -= 20
+            if neighbor[0] > 29:
+                neighbor[0] -= 30
 
         for neighbor in neighbour_list:
             try:
