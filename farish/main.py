@@ -215,7 +215,6 @@ while running:
 
     pygame.display.update()
     clock.tick(FPS)
-    print(state)
 
 pygame.quit()
 sys.exit()
