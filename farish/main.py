@@ -110,6 +110,28 @@ def click_cell(pos):
     grid_pos = [pos[0]-100, pos[1]-180]
     grid_pos[0] = grid_pos[0]//20
     grid_pos[1] = grid_pos[1]//20
+    print(grid_pos[0], grid_pos[1])
+
+    if game_window.grid[grid_pos[1]][grid_pos[0]].alive:
+        game_window.grid[grid_pos[1]][grid_pos[0]].alive = False
+    else:
+        game_window.grid[grid_pos[1]][grid_pos[0]].alive = True
+
+    print("click")
+
+
+def mouse_on_grid(pos):
+    if pos[0] > 100 and pos[0] < WIDTH - 100:
+        if pos[1] > 180 and pos[1] < HEIGHT-20:
+            return True
+    return False
+
+
+def click_cell(pos):
+
+    grid_pos = [pos[0]-100, pos[1]-180]
+    grid_pos[0] = grid_pos[0]//20
+    grid_pos[1] = grid_pos[1]//20
 
     if game_window.grid[grid_pos[1]][grid_pos[0]].alive:
         game_window.grid[grid_pos[1]][grid_pos[0]].alive = False
@@ -180,13 +202,6 @@ def reset_grid():
     game_window.reset_grid()
 
 
-def mouse_on_grid(pos):
-    if pos[0] > 100 and pos[0] < WIDTH - 100:
-        if pos[1] > 180 and pos[1] < HEIGHT-20:
-            return True
-    return False
-
-
 pygame.init()
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
@@ -202,12 +217,10 @@ while running:
         get_events()
         update()
         draw()
-
     if state == 'running':
         running_get_events()
         running_update()
         running_draw()
-
     if state == 'paused':
         paused_get_events()
         paused_update()
