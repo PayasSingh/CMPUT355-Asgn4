@@ -1,5 +1,4 @@
 import sys
-
 import pygame
 from game_window_class import *
 from button_class import *
@@ -8,9 +7,8 @@ WIDTH, HEIGHT = 800, 800
 BACKGROUND = (199, 199, 199)
 FPS = 60
 
-# ===============================================
-# ===============SETTING FUNCTIONS===============
-# ===============================================
+# ====================================
+# =========SETTINGS FUNCTIONS===========
 
 
 def get_events():
@@ -22,7 +20,6 @@ def get_events():
             mouse_pos = pygame.mouse.get_pos()
             if mouse_on_grid(mouse_pos):
                 click_cell(mouse_pos)
-
             else:
                 for button in buttons:
                     button.click()
@@ -40,9 +37,8 @@ def draw():
         button.draw()
     game_window.draw()
 
-# ===============================================
-# ===============RUNNING FUNCTIONS===============
-# ===============================================
+# =====================================
+# =========RUNNING FUNCTIONS===========
 
 
 def running_get_events():
@@ -54,7 +50,6 @@ def running_get_events():
             mouse_pos = pygame.mouse.get_pos()
             if mouse_on_grid(mouse_pos):
                 click_cell(mouse_pos)
-
             else:
                 for button in buttons:
                     button.click()
@@ -72,9 +67,8 @@ def running_draw():
         button.draw()
     game_window.draw()
 
-# ==============================================
-# ===============PAUSED FUNCTIONS===============
-# ==============================================
+# ====================================
+# =========PAUSED FUNCTIONS===========
 
 
 def paused_get_events():
@@ -86,7 +80,6 @@ def paused_get_events():
             mouse_pos = pygame.mouse.get_pos()
             if mouse_on_grid(mouse_pos):
                 click_cell(mouse_pos)
-
             else:
                 for button in buttons:
                     button.click()
@@ -105,33 +98,18 @@ def paused_draw():
     game_window.draw()
 
 
-def click_cell(pos):
-
-    grid_pos = [pos[0]-100, pos[1]-180]
-    grid_pos[0] = grid_pos[0]//20
-    grid_pos[1] = grid_pos[1]//20
-    print(grid_pos[0], grid_pos[1])
-
-    if game_window.grid[grid_pos[1]][grid_pos[0]].alive:
-        game_window.grid[grid_pos[1]][grid_pos[0]].alive = False
-    else:
-        game_window.grid[grid_pos[1]][grid_pos[0]].alive = True
-
-    print("click")
-
-
 def mouse_on_grid(pos):
-    if pos[0] > 100 and pos[0] < WIDTH - 100:
-        if pos[1] > 180 and pos[1] < HEIGHT-20:
+    if pos[0] > 50 and pos[0] < WIDTH - 50:
+        if pos[1] > 50 and pos[1] < HEIGHT-20:
             return True
     return False
 
 
 def click_cell(pos):
-
     grid_pos = [pos[0]-100, pos[1]-180]
     grid_pos[0] = grid_pos[0]//20
     grid_pos[1] = grid_pos[1]//20
+    print(grid_pos[0], grid_pos[1])
 
     if game_window.grid[grid_pos[1]][grid_pos[0]].alive:
         game_window.grid[grid_pos[1]][grid_pos[0]].alive = False
@@ -143,44 +121,43 @@ def make_buttons():
     buttons = []
     buttons.append(Button(
         window,
-        WIDTH//5-50, 50, 100, 30,
+        WIDTH//2-50, 50, 100, 30,
         text="RUN",
         color=(28, 111, 51),
         hover_color=(48, 131, 82),
+        bold_text=True,
         function=run_game,
-        state='setting',
-        bold_text=True
+        state='setting'
     ))
-
     buttons.append(Button(
         window,
-        WIDTH//2-50, 50, 100, 20,
+        WIDTH//2-50, 50, 100, 30,
         text="PAUSE",
         color=(18, 104, 135),
         hover_color=(51, 168, 212),
+        bold_text=True,
         function=pause_game,
-        state='running',
-        bold_text=True
+        state='running'
     ))
     buttons.append(Button(
         window,
-        WIDTH//4-50, 50, 100, 20,
+        WIDTH//4-50, 50, 100, 30,
         text="RESET",
         color=(117, 14, 14),
         hover_color=(217, 54, 54),
+        bold_text=True,
         function=reset_grid,
-        state='paused',
-        bold_text=True
+        state='paused'
     ))
     buttons.append(Button(
         window,
-        WIDTH//1.25-50, 50, 100, 20,
+        WIDTH//1.25-50, 50, 100, 30,
         text="RESUME",
         color=(28, 111, 51),
         hover_color=(48, 131, 82),
+        bold_text=True,
         function=run_game,
-        state='paused',
-        bold_text=True
+        state='paused'
     ))
 
     return buttons
@@ -198,7 +175,7 @@ def pause_game():
 
 def reset_grid():
     global state
-    state = 'setting'
+    state = 'sitting'
     game_window.reset_grid()
 
 
@@ -213,15 +190,18 @@ running = True
 
 while running:
     mouse_pos = pygame.mouse.get_pos()
-    if state == 'setting':
+
+    if (state == 'setting'):
         get_events()
         update()
         draw()
-    if state == 'running':
+
+    if (state == 'running'):
         running_get_events()
         running_update()
         running_draw()
-    if state == 'paused':
+
+    if (state == 'paused'):
         paused_get_events()
         paused_update()
         paused_draw()
