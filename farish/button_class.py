@@ -3,9 +3,9 @@ vector = pygame.math.Vector2
 
 
 class Button:
-    def __init__(self, surface, x, y, width, height, state='', id='', function=0, color=(255, 255, 255),
-                 hover_color=(255, 255, 255), border=True, border_width=2, border_color=(0, 0, 0), text='',
-                 font_name='arial', text_size=20, text_color=(0, 0, 0), bold_text=False):
+    def __init__(self, surface, x, y, width, height, state='', id='', function=0, color=(255, 255, 255), hover_color=(255, 255, 255),
+                 border=True, border_width=2, border_color=(0, 0, 0), text='', font_name="arial", text_size=20, text_color=(0, 0, 0),
+                 bold_text=False):
         self.type = 'button'
         self.x = x
         self.y = y
@@ -51,24 +51,27 @@ class Button:
             if self.border:
                 self.image.fill(self.border_color)
                 if self.hovered:
-                    pygame.draw.rect(self.image,
-                                     self.hover_color,
-                                     (
-                                         self.border_width,
-                                         self.border_width,
-                                         self.width-(self.border_width*2),
-                                         self.height-(self.border_width*2)
-                                     ))
-
+                    pygame.draw.rect(
+                        self.image,
+                        self.hover_color,
+                        (
+                            self.border_width,
+                            self.border_width,
+                            self.width-(self.border_width*2),
+                            self.height-(self.border_width*2)
+                        )
+                    )
                 else:
-                    pygame.draw.rect(self.image,
-                                     self.color,
-                                     (
-                                         self.border_width,
-                                         self.border_width,
-                                         self.width-(self.border_width*2),
-                                         self.height-(self.border_width*2)
-                                     ))
+                    pygame.draw.rect(
+                        self.image,
+                        self.color,
+                        (
+                            self.border_width,
+                            self.border_width,
+                            self.width-(self.border_width*2),
+                            self.height-(self.border_width*2)
+                        )
+                    )
             else:
                 self.image.fill(self.color)
 
@@ -79,15 +82,8 @@ class Button:
 
     def show_text(self):
         font = pygame.font.SysFont(
-            self.font_name,
-            self.text_size,
-            bold=self.bold_text
-        )
-        text = font.render(
-            self.text,
-            False,
-            self.text_color
-        )
+            self.font_name, self.text_size, bold=self.bold_text)
+        text = font.render(self.text, False, self.text_color)
         size = text.get_size()
         x, y = self.width // 2-(size[0]//2), self.height//2 - (size[1]//2)
         pos = vector(x, y)
