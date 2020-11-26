@@ -59,6 +59,8 @@ def running_update():
     game_window.update()
     for button in buttons:
         button.update(mouse_pos, game_state=state)
+    if frame_count%(FPS//10)==0:
+        game_window.evaluate()
 
 
 def running_draw():
@@ -99,8 +101,8 @@ def paused_draw():
 
 
 def mouse_on_grid(pos):
-    if pos[0] > 50 and pos[0] < WIDTH - 50:
-        if pos[1] > 50 and pos[1] < HEIGHT-20:
+    if pos[0] > 100 and pos[0] < WIDTH - 100:
+        if pos[1] > 180 and pos[1] < HEIGHT-20:
             return True
     return False
 
@@ -185,10 +187,12 @@ clock = pygame.time.Clock()
 game_window = Game_window(window, 100, 180)
 buttons = make_buttons()
 state = 'setting'
+frame_count=0
 
 running = True
 
 while running:
+    frame_count+=1
     mouse_pos = pygame.mouse.get_pos()
 
     if (state == 'setting'):

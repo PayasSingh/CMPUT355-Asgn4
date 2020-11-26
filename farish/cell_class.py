@@ -15,9 +15,7 @@ class Cell:
 
     def update(self):
         self.rect.topleft = (self.grid_x*20, self.grid_y*20)
-        for cell in self.neighbours:
-            if cell.alive:
-                self.alive_neighbours = + 1
+
 
     def draw(self):
         if self.alive:
@@ -30,7 +28,7 @@ class Cell:
     def get_neighbours(self, grid):
         neighbour_list = [
             [1, 1], [-1, -1],
-            [1, -1], [-1, 1],
+            [-1, 1], [1, -1],
             [0, -1], [0, 1],
             [1, 0], [-1, 0]
         ]
@@ -55,3 +53,11 @@ class Cell:
                 self.neighbours.append(grid[neighbor[1]][neighbor[0]])
             except:
                 print(neighbor)
+
+    def live_neighbours(self):
+        count=0
+        for neighbour in self.neighbours:
+            if neighbour.alive:
+                count+=1
+
+        self.alive_neighbours=count
