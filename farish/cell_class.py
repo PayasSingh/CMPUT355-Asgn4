@@ -1,5 +1,4 @@
 import pygame
-import random
 
 
 class Cell:
@@ -17,7 +16,7 @@ class Cell:
         self.rect.topleft = (self.grid_x*20, self.grid_y*20)
         for cell in self.neighbours:
             if cell.alive:
-                self.alive_neighbours = + 1
+                self.alive_neighbours += 1
 
     def draw(self):
         if self.alive:

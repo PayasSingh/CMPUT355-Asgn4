@@ -3,10 +3,10 @@ vector = pygame.math.Vector2
 
 
 class Button:
-    def __init__(self, surface, x, y, width, height, state="", id="", function=0, color=(255, 255, 255), hover_color=(255, 255, 255),
-                 border=True, border_width=2, border_color=(0, 0, 0), text="", font_name="arial", text_size=20, text_color=(0, 0, 0),
-                 bold_text=False):
-
+    def __init__(self, surface, x, y, width, height, state='', id='', function=0, color=(255, 255, 255),
+                 hover_color=(255, 255, 255), border=True, border_width=2, border_color=(0, 0, 0), text='',
+                 font_name='arial', text_size=20, text_color=(0, 0, 0), bold_text=False):
+        self.type = 'button'
         self.x = x
         self.y = y
         self.pos = vector(x, y)
@@ -79,8 +79,15 @@ class Button:
 
     def show_text(self):
         font = pygame.font.SysFont(
-            self.font_name, self.text_size, bold=self.bold_text)
-        text = font.render(self.text, False, self.text_color)
+            self.font_name,
+            self.text_size,
+            bold=self.bold_text
+        )
+        text = font.render(
+            self.text,
+            False,
+            self.text_color
+        )
         size = text.get_size()
         x, y = self.width // 2-(size[0]//2), self.height//2 - (size[1]//2)
         pos = vector(x, y)
@@ -88,8 +95,8 @@ class Button:
 
     def mouse_hovering(self, pos):
         if self.showing:
-            if (pos[0] > self.pos[0]) and (pos[0] < self.pos[0] + self.width):
-                if (pos[1] > self.pos[1]) and (pos[1] < self.pos[1] + self.height):
+            if pos[0] > self.pos[0] and pos[0] < self.pos[0] + self.width:
+                if pos[1] > self.pos[1] and pos[1] < self.pos[1] + self.height:
                     return True
 
             else:

@@ -175,7 +175,7 @@ def pause_game():
 
 def reset_grid():
     global state
-    state = 'sitting'
+    state = 'setting'
     game_window.reset_grid()
 
 
@@ -191,23 +191,24 @@ running = True
 while running:
     mouse_pos = pygame.mouse.get_pos()
 
-    if (state == 'setting'):
+    if state == 'setting':
         get_events()
         update()
         draw()
 
-    if (state == 'running'):
+    if state == 'running':
         running_get_events()
         running_update()
         running_draw()
 
-    if (state == 'paused'):
+    if state == 'paused':
         paused_get_events()
         paused_update()
         paused_draw()
 
     pygame.display.update()
     clock.tick(FPS)
+    print(state)
 
 pygame.quit()
 sys.exit()
