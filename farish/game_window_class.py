@@ -40,6 +40,7 @@ class Game_window:
                       for x in range(self.cols)]
                      for y in range(self.rows)
                      ]
+
         for row in self.grid:
             for cell in row:
                 cell.get_neighbours(self.grid)
